@@ -4,11 +4,13 @@ import httpFetch from "https://deno.land/x/esbuild_plugin_http_fetch@v1.0.2/inde
 
 fs.emptyDirSync("./public/js");
 
+const entryPoints = Deno.args;
+
 const buildESM = () =>
   esbuild.build({
-    entryPoints: Deno.args,
-    outdir: "./public/js/module/",
-    outbase: "./server/pages",
+    entryPoints,
+    outdir: "./system/public/js/module/",
+    outbase: "./system/server/pages",
     format: "esm",
     bundle: true,
     minify: true,
@@ -19,9 +21,9 @@ const buildESM = () =>
 
 const buildNonModule = () =>
   esbuild.build({
-    entryPoints: Deno.args,
-    outdir: "./public/js/classic",
-    outbase: "./server/pages",
+    entryPoints,
+    outdir: "./system/public/js/classic",
+    outbase: "./system/server/pages",
     format: "esm",
     bundle: true,
     minify: true,

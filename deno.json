@@ -1,9 +1,9 @@
 {
   "tasks": {
-    "start": "deno run -A --watch=./ server/main.tsx",
+    "start": "deno run -A --watch=./ system/server/main.tsx",
     "bundle": "deno run -A --watch=./ bin/bundle.ts **/*.client.tsx",
-    "dev:server": "ENVIRONMENT=\"dev\" deno run -A --watch=./ server/main.tsx",
-    "dev:style": "tw -o ./public/styles.css -w"
+    "dev": "ENVIRONMENT=\"dev\" deno run -A --watch=./ system/server/main.tsx",
+    "dev:style": "tw -o ./system/public/styles.css -w"
   },
   "compilerOptions": {
     "lib": ["deno.window", "dom"]
