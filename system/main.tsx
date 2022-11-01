@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.160.0/http/server.ts";
-import router from "./routes.tsx";
+import router from "./routes/_.tsx";
 
 const port = 8080;
 

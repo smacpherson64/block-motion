@@ -29,9 +29,9 @@ export default function Page() {
         <script></script>
         <script
           type="module"
-          src="/public/js/module/Home/home-page.client.js"
+          src="/public/js/module/HomePage/HomePage.client.js"
         />
-        <script noModule src="/public/js/classic/Home/home-page.client.js" />
+        <script noModule src="/public/js/classic/HomePage/HomePage.client.js" />
       </head>
 
       <body className="bg-slate-800 h-full min-h-screen w-full grid place-items-center text-gray-100">

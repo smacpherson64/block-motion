@@ -2,7 +2,7 @@ import * as esbuild from "https://deno.land/x/esbuild@v0.15.12/mod.js";
 import * as fs from "https://deno.land/std@0.160.0/fs/mod.ts";
 import httpFetch from "https://deno.land/x/esbuild_plugin_http_fetch@v1.0.2/index.js";
 
-fs.emptyDirSync("./public/js");
+fs.emptyDirSync("./system/public/js");
 
 const entryPoints = Deno.args;
 
@@ -10,7 +10,7 @@ const buildESM = () =>
   esbuild.build({
     entryPoints,
     outdir: "./system/public/js/module/",
-    outbase: "./system/server/pages",
+    outbase: "./system/ui/components",
     format: "esm",
     bundle: true,
     minify: true,
@@ -23,7 +23,7 @@ const buildNonModule = () =>
   esbuild.build({
     entryPoints,
     outdir: "./system/public/js/classic",
-    outbase: "./system/server/pages",
+    outbase: "./system/ui/components",
     format: "esm",
     bundle: true,
     minify: true,
