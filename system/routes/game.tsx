@@ -1,5 +1,9 @@
+import { React } from "../dependencies/isometric.ts";
 import { CallbackHandler } from "../utils/router.ts";
 import { errorResponse } from "../utils/responses.tsx";
+import { renderPageAsStream } from "../utils/jsx.tsx";
+import GamePage from "../ui/components/GamePage/GamePage.tsx";
+import { hash } from "../utils/hash.ts";
 
 const game: CallbackHandler = async function game(request, urlParams) {
   const gameId = urlParams["gameId"];
@@ -12,7 +16,7 @@ const game: CallbackHandler = async function game(request, urlParams) {
   }
 
   const isSocket =
-    (request.headers.get("upgrade") || "").toLowerCase() === "websocket";
+    request.headers.get("upgrade")?.toLowerCase() === "websocket";
 
   if (isSocket) {
     const { socket, response } = Deno.upgradeWebSocket(request);
@@ -28,11 +32,17 @@ const game: CallbackHandler = async function game(request, urlParams) {
     return await response;
   }
 
-  const body = `Your user-agent is:\n\n${
-    request.headers.get("user-agent") ?? "Unknown"
-  }`;
+  const gameHash = await hash(gameId);
 
-  return await new Response(body, { status: 200 });
+  console.log({ gameHash });
+
+  return new Response(
+    await renderPageAsStream(<GamePage gameHash={gameHash} />),
+    {
+      status: 200,
+      headers: { "Content-Type": "text/html" },
+    }
+  );
 };
 
 export default game;

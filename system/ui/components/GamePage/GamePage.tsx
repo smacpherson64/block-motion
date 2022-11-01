@@ -5,7 +5,19 @@ const rows = 5;
 const columns = 9;
 const theme = { gap: 1, blockSize: 50 };
 
-export default function Page() {
+export default function GamePage(props: { gameHash: string }) {
+  React.useEffect(() => {
+    try {
+      const ws = new WebSocket(`ws://localhost:8080/games/${props.gameHash}`);
+      ws.onopen = () => console.log("onopen", ws);
+      ws.onmessage = (m) => console.log("onmessage", ws, m.data);
+      ws.onclose = () => console.log("onclose", "Disconnected from server ...");
+      ws.onerror = (e) => console.log("onerror", e);
+    } catch (err) {
+      console.error("Failed to connect to server ... exiting", err);
+    }
+  }, []);
+
   return (
     <html lang="en-us" className="h-full w-full">
       <head>
@@ -26,12 +38,17 @@ export default function Page() {
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⬅️</text></svg>"
         />
 
-        <script></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.gameHash="${props?.gameHash}"`,
+          }}
+        />
+
         <script
           type="module"
-          src="/public/js/module/Home/home-page.client.js"
+          src="/public/js/module/GamePage/GamePage.client.js"
         />
-        <script noModule src="/public/js/classic/Home/home-page.client.js" />
+        <script noModule src="/public/js/classic/GamePage/GamePage.client.js" />
       </head>
 
       <body className="bg-slate-800 h-full min-h-screen w-full grid place-items-center text-gray-100">
