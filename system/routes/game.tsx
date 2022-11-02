@@ -6,9 +6,10 @@ import GamePage from "../ui/components/GamePage/GamePage.tsx";
 import { hash } from "../utils/hash.ts";
 
 const game: CallbackHandler = async function game(request, urlParams) {
-  const gameId = urlParams["gameId"];
+  const gameId = urlParams["gameId"] ?? "";
+  const gameHash = await hash(gameId);
 
-  if (!gameId) {
+  if (!gameId || !gameHash) {
     console.error(
       `Game handler requires a gameId in the url: "${request.url.toString()}"`
     );
@@ -31,10 +32,6 @@ const game: CallbackHandler = async function game(request, urlParams) {
 
     return await response;
   }
-
-  const gameHash = await hash(gameId);
-
-  console.log({ gameHash });
 
   return new Response(
     await renderPageAsStream(<GamePage gameHash={gameHash} />),
