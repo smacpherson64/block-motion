@@ -1,3 +1,3 @@
-import * as ReactDomServerImport from "https://esm.sh/react-dom@18.2.0/server.js";
+import * as ReactDomServerImport from "react-dom/server";
 
 export const ReactDomServer = ReactDomServerImport;

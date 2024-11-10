@@ -1,11 +1,10 @@
 import { React } from "../dependencies/isometric.ts";
-import { CallbackHandler } from "../utils/router.ts";
 import { errorResponse } from "../utils/responses.tsx";
 import { renderPageAsStream } from "../utils/jsx.tsx";
 import GamePage from "../ui/components/GamePage/GamePage.tsx";
 import { hash } from "../utils/hash.ts";
 
-const game: CallbackHandler = async function game(request, urlParams) {
+export default async function game(request, urlParams) {
   const gameId = urlParams["gameId"] ?? "";
   const gameHash = await hash(gameId);
 
@@ -40,6 +39,4 @@ const game: CallbackHandler = async function game(request, urlParams) {
       headers: { "Content-Type": "text/html" },
     }
   );
-};
-
-export default game;
+}

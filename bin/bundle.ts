@@ -1,6 +1,7 @@
-import * as esbuild from "https://deno.land/x/esbuild@v0.15.12/mod.js";
-import * as fs from "https://deno.land/std@0.160.0/fs/mod.ts";
+import * as esbuild from "https://deno.land/x/esbuild@v0.24.0/mod.js";
+import * as fs from "@std/fs";
 import httpFetch from "https://deno.land/x/esbuild_plugin_http_fetch@v1.0.2/index.js";
+import { denoPlugins } from "jsr:@luca/esbuild-deno-loader@^0.11.0";
 
 fs.emptyDirSync("./system/public/js");
 
@@ -17,6 +18,7 @@ const buildESM = () =>
     treeShaking: true,
     sourcemap: true,
     logLevel: "verbose",
+    plugins: [...denoPlugins()],
   });
 
 const buildNonModule = () =>
@@ -32,7 +34,7 @@ const buildNonModule = () =>
     platform: "browser",
     target: "es6",
     metafile: true,
-    plugins: [httpFetch],
+    plugins: [httpFetch, ...denoPlugins()],
   });
 
 function main() {

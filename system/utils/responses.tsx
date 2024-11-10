@@ -1,4 +1,4 @@
-import React from "https://esm.sh/react@18.2.0/react.js";
+import React from "https://esm.sh/react@18.2.0";
 import { renderPageAsStream } from "./jsx.tsx";
 
 export const errorResponse = new Response(

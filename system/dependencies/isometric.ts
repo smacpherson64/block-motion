@@ -1,7 +1,7 @@
-import * as ReactImport from "https://esm.sh/react@18.2.0/react.js";
-import * as ReactDOMImport from "https://esm.sh/react-dom@18.2.0/client.js";
-import * as xstateImport from "https://esm.sh/v96/xstate@4.34.0/es2021/xstate.js";
-export * as hash from "https://esm.sh/v96/hash-wasm@4.9.0/es2021/hash-wasm.js";
+import * as ReactImport from "react";
+import * as ReactDOMImport from "react-dom";
+import * as xstateImport from "xstate";
+export * as hash from "hash-wasm";
 
 export const React = ReactImport;
 export const ReactDOM = ReactDOMImport;
